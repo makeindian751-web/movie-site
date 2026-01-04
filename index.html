@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,10 +41,31 @@ img{
   border-radius:10px;
   margin-bottom:10px;
 }
+.ad{
+  background:#020617;
+  border:1px solid #22c55e;
+  padding:10px;
+  border-radius:10px;
+  margin-bottom:15px;
+  text-align:center;
+}
+.ad a{
+  background:none;
+  color:#22c55e;
+  padding:0;
+}
 </style>
 </head>
 
 <body>
+
+<!-- 🔔 WEBSITE AD (BOT PROMO) -->
+<div class="ad">
+  🤖 Fast Movie Access on Telegram<br>
+  <a href="https://t.me/VIP_ROBIN_MOVIEbot">
+    👉 Open Movie Bot
+  </a>
+</div>
 
 <h2>🎬 Movie Search</h2>
 
@@ -52,7 +74,7 @@ img{
 <div id="result"></div>
 
 <script>
-const API_KEY = "0d1c81e80e9122ad5681ad3dbcf838bc"; // 🔴 YAHAN APNI TMDB API KEY DALO
+const API_KEY = "0d1c81e80e9122ad5681ad3dbcf838bc"; // 🔴 APNI TMDB KEY DALO
 
 async function searchMovie(){
   let q = document.getElementById("search").value;
