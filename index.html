@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,9 +12,6 @@ body{
   font-family:Arial;
   padding:20px;
 }
-.search-box{
-  margin-bottom:20px;
-}
 input{
   width:100%;
   padding:12px;
@@ -27,7 +23,7 @@ input{
   background:#020617;
   padding:15px;
   border-radius:12px;
-  margin-top:15px;
+  margin-top:20px;
 }
 a{
   display:inline-block;
@@ -39,7 +35,7 @@ a{
   text-decoration:none;
   font-weight:bold;
 }
-.poster{
+img{
   width:100%;
   border-radius:10px;
   margin-bottom:10px;
@@ -49,26 +45,39 @@ a{
 
 <body>
 
-<!-- 🔍 SEARCH BOX (BODY TOP) -->
-<div class="search-box">
-  <input type="text" placeholder="Movie name dalo..." />
-</div>
-
 <h2>🎬 Movie Search</h2>
 
-<div class="movie">
-  <img class="poster" src="https://via.placeholder.com/300x450?text=Movie+Poster">
-  <h3>Sample Movie</h3>
-  <p>Select Quality:</p>
+<input id="search" placeholder="Movie name dalo..." onkeyup="searchMovie()">
 
-  <a href="#">480p</a>
-  <a href="#">720p</a>
-  <a href="#">1080p</a>
-</div>
+<div id="result"></div>
 
-<p style="opacity:.6;margin-top:20px">
-Demo page for Telegram bot + website integration
-</p>
+<script>
+const API_KEY = "0d1c81e80e9122ad5681ad3dbcf838bc"; // 🔴 YAHAN APNI TMDB API KEY DALO
+
+async function searchMovie(){
+  let q = document.getElementById("search").value;
+  if(q.length < 3) return;
+
+  let res = await fetch(
+    `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${q}`
+  );
+  let data = await res.json();
+  if(!data.results || !data.results.length) return;
+
+  let m = data.results[0];
+  document.getElementById("result").innerHTML = `
+    <div class="movie">
+      <img src="https://image.tmdb.org/t/p/w500${m.poster_path}">
+      <h3>${m.title}</h3>
+      <p>Release: ${m.release_date || "N/A"}</p>
+
+      <a href="https://t.me/VIP_ROBIN_MOVIEbot?start=${encodeURIComponent(m.title+' 480p')}">480p</a>
+      <a href="https://t.me/VIP_ROBIN_MOVIEbot?start=${encodeURIComponent(m.title+' 720p')}">720p</a>
+      <a href="https://t.me/VIP_ROBIN_MOVIEbot?start=${encodeURIComponent(m.title+' 1080p')}">1080p</a>
+    </div>
+  `;
+}
+</script>
 
 </body>
 </html>
